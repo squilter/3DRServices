@@ -119,6 +119,7 @@ public class MavLinkDoCmds {
         if (drone == null)
             return;
 
+        String firmwareVersion = drone.getFirmwareVersion();
         Parameter mountParam = drone.getParameters().getParameter("MNT_MODE");
         if(mountParam==null){
             msg_mount_configure msg = new msg_mount_configure();
@@ -131,7 +132,6 @@ public class MavLinkDoCmds {
             drone.getMavClient().sendMavPacket(msg.pack());
         }else{
             drone.getParameters().sendParameter("MNT_MODE", 1, mountMode);
-            mountParam.value = mountMode;
         }
 
     }
